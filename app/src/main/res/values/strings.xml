@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Voice Recorder App</string>
+
+    <!--Start Page Strings-->
+    <string name="start_page_title">Voice Recorder</string>
+    <string name="record_audio">Record Audio</string>
+    <string name="stop_record_audio">Stop Recording Audio</string>
+    <string name="play_audio">Play Audio</string>
+    <string name="stop_playing_record_audio">Stop Playing Audio</string>
+</resources>
