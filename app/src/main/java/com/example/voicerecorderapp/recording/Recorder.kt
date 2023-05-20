@@ -16,6 +16,7 @@ class Recorder (private val context:Context){
             MediaRecorder(context)
         } else MediaRecorder()
     }
+    @RequiresApi(Build.VERSION_CODES.S)
     fun start(outputFile: File) {
         createRecorder().apply{
             setAudioSource(MediaRecorder.AudioSource.MIC)

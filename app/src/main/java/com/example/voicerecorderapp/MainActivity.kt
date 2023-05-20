@@ -1,9 +1,11 @@
 package com.example.voicerecorderapp
 
+import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.example.voicerecorderapp.playing.Player
 import com.example.voicerecorderapp.recording.Recorder
 import java.io.File
@@ -22,6 +24,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // requesting permission to record the user's audio
+        // given recording audio has the potential to compromise the user's
+        // privacy (this is considered a dangerous permission), they have
+        // to be asked if they want to record audio. It will not work otherwise
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.RECORD_AUDIO),
+            0
+        )
 
         // View elements declarations and assignments
         val spRecordButton = findViewById<Button>(R.id.spBtnRecordAudio)
