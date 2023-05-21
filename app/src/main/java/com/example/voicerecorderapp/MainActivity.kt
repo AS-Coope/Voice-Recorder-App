@@ -1,10 +1,12 @@
 package com.example.voicerecorderapp
 
 import android.Manifest
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.voicerecorderapp.playing.Player
 import com.example.voicerecorderapp.recording.Recorder
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private var audioFile: File? = null
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
