@@ -13,12 +13,13 @@
     android:clickable="true">
 
     <ImageButton
+        android:id="@+id/recordingPlay"
         android:layout_width="62dp"
         android:layout_height="62dp"
-        android:clickable="false"
         android:background="@drawable/recording_in_progress_background"
+        android:clickable="false"
         android:src="@drawable/play_audio"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"

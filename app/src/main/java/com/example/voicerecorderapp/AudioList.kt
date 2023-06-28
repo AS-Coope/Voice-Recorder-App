@@ -1,6 +1,7 @@
 package com.example.voicerecorderapp
 
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,11 +21,15 @@ class AudioList : AppCompatActivity(), onItemClickListener {
         Player(applicationContext)
     }
 
+    var isPlaying = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio_list)
 
+        // view related initializations
         val recyclerview = findViewById<RecyclerView>(R.id.recyclerView)
+
 
         // database related initializations
         val audioDao = AudioDatabase.getDatabase(application).audioEntityDao()
@@ -44,9 +49,9 @@ class AudioList : AppCompatActivity(), onItemClickListener {
 
     }
 
-
     override fun onItemClickListener(position: Int) {
 
+        var recordingPlayBtn = findViewById<ImageButton>(R.id.recordingPlay)
         // determining which audio to play in the recycler view
         var audio = audioFiles[position]
         var audioFileName = "${audio.aName}.mp3"
@@ -54,7 +59,22 @@ class AudioList : AppCompatActivity(), onItemClickListener {
         // getting the audio file from the app's cache
         var theAudioFile = File(cacheDir, audioFileName)
 
+        if (isPlaying == false){
         //println(theAudioFile.absoluteFile)
-        player.playFile(theAudioFile)
+
+            // ui related updates
+            //recordingPlayBtn.setImageResource(R.drawable.stop_audio)
+
+            // logic update
+            isPlaying = true
+            player.playFile(theAudioFile)
+        } else {
+            // ui related updates
+            //recordingPlayBtn.setImageResource(R.drawable.play_audio)
+
+            // logic update
+            isPlaying = false
+            player.stop()
+        }
     }
 }

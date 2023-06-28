@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         val audioDao = AudioDatabase.getDatabase(application).audioEntityDao()
 
         // View elements declarations and assignments
-        val spPlayButton = findViewById<Button>(R.id.spBtnPlayAudio)
-        val spStopPlayButton = findViewById<Button>(R.id.spBtnStopPlayAudio)
+        //val spPlayButton = findViewById<Button>(R.id.spBtnPlayAudio)
+        //val spStopPlayButton = findViewById<Button>(R.id.spBtnStopPlayAudio)
 
         // image button views
         val recordButtonIb = findViewById<ImageView>(R.id.recordIb)

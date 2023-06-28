@@ -7,7 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.voicerecorderapp.audiodatabase.Audio
 
-class Adapter(var audioFiles: ArrayList<Audio>, var itemListener: onItemClickListener): RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(
+    var audioFiles: ArrayList<Audio>, var itemListener: onItemClickListener
+    ): RecyclerView.Adapter<Adapter.ViewHolder>() {
 
     inner class ViewHolder(theView: View): RecyclerView.ViewHolder(theView), View.OnClickListener{
         var audioName: TextView = theView.findViewById(R.id.audioName)
@@ -27,7 +29,7 @@ class Adapter(var audioFiles: ArrayList<Audio>, var itemListener: onItemClickLis
                 itemListener.onItemClickListener(itemPosition)
             }
         }
-    }
+    }// end of View Holder inner class
 
     // creates the audio layout but does not fill in the various text fields
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -43,7 +45,7 @@ class Adapter(var audioFiles: ArrayList<Audio>, var itemListener: onItemClickLis
     // here is where the data is now decided when to be shown on screen/ filled in its relevant text fields, respectively
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(position!= RecyclerView.NO_POSITION){
-            var record = audioFiles[position]
+            val record = audioFiles[position]
             holder.audioName.text = record.aName
             holder.audioSize.text = record.audioSize
             holder.audioLength.text = record.aLength
