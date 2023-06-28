@@ -19,10 +19,10 @@ class Recorder (private val context:Context){
     @RequiresApi(Build.VERSION_CODES.S)
     fun start(outputFile: File) {
         createRecorder().apply{
-            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setAudioSource(MediaRecorder.AudioSource.MIC) // what records the audio
             setOutputFormat(MediaRecorder.OutputFormat.MPEG_4) // apparently MPEG_4 = MP3
             setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-            setOutputFile(FileOutputStream(outputFile).fd)
+            setOutputFile(FileOutputStream(outputFile).fd) // where the file path will be stored
 
             prepare() // preparing to record
             start() // starts the recording
