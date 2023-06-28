@@ -12,6 +12,10 @@ interface AudioDao {
     @Insert
     suspend fun insertAudio(audio: Audio)
 
+    // retrieves all the audio files in the database
+    @Query("SELECT * FROM audio_recordings")
+    fun getAllRecords(): List<Audio>
+
     // removes all audio recordings from the database
     @Delete
     suspend fun deleteAllAudio(audio: Audio)

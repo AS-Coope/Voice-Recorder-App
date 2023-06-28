@@ -1,6 +1,7 @@
 package com.example.voicerecorderapp
 
 import android.Manifest
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -142,6 +143,14 @@ class MainActivity : AppCompatActivity() {
             } // end of else (isRecording check)
         } // end of setOnClickListener
 
+        // going to the audio recordings list
+        audioListButtonIb.setOnClickListener {
+            Intent(this, AudioList::class.java).also{
+                startActivity(it)
+            }
+        }
+
+        /*
         spPlayButton.setOnClickListener {
             player.playFile(audioFile?: return@setOnClickListener)
             Toast.makeText(applicationContext, "Playing Has Begun", Toast.LENGTH_SHORT).show()
@@ -150,6 +159,7 @@ class MainActivity : AppCompatActivity() {
         spStopPlayButton.setOnClickListener {
             player.stop()
             Toast.makeText(applicationContext, "Playing Has Stopped", Toast.LENGTH_SHORT).show()
-        }
-    }
+        }*/
+
+    } // end of onCreate method
 }

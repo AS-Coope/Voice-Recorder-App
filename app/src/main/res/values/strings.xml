@@ -7,4 +7,6 @@
     <string name="stop_record_audio">Stop Recording Audio</string>
     <string name="play_audio">Play Audio</string>
     <string name="stop_playing_record_audio">Stop Playing Audio</string>
+
+    <string name="audio_list_title">Audio Recordings</string>
 </resources>
