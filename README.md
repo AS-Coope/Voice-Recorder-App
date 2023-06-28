@@ -20,7 +20,7 @@ To use this project:
 To consider the app 'complete', or to have some sort of end point to the development of a v1.0, the following are the deliverables for this project:
 - [X] The app shall allow the user to record audio.
 - [X] The app shall store the user's audio along with metadata such as time duration, file size, file name, length of the audio and its storage location on the device.
-- [ ] The app shall show the user all audio recordings in a list.
+- [X] The app shall show the user all audio recordings in a list.
 - [ ] The app shall allow the user to play any audio recording they choose from the list.
 - [ ] The app shall allow the user to view details (metadata) of an audio recording.
 - [ ] The app shall allow the user to rename their audio recording whether immediately after recording the audio or when they view the audio recording from the list.
