@@ -2,12 +2,13 @@ package com.example.voicerecorderapp
 
 import android.Manifest
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.voicerecorderapp.audiodatabase.Audio
 import com.example.voicerecorderapp.audiodatabase.AudioDatabase
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         Player(applicationContext)
     }
 
+    var isRecording: Boolean = false
     //private var audioFile: File? = null
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -50,14 +52,16 @@ class MainActivity : AppCompatActivity() {
             0
         )
 
-        // creating a audioDao object to make use of
+        // creating an audioDao object for interacting with the database
         val audioDao = AudioDatabase.getDatabase(application).audioEntityDao()
 
         // View elements declarations and assignments
-        val spRecordButton = findViewById<Button>(R.id.spBtnRecordAudio)
-        val spStopRecordButton = findViewById<Button>(R.id.spBtnStopRecordAudio)
         val spPlayButton = findViewById<Button>(R.id.spBtnPlayAudio)
         val spStopPlayButton = findViewById<Button>(R.id.spBtnStopPlayAudio)
+
+        // image button views
+        val recordButtonIb = findViewById<ImageView>(R.id.recordIb)
+        val audioListButtonIb = findViewById<ImageView>(R.id.audioListIb)
 
         //TODO("Set up logic to change image (play or stop) based on what is currently present")
 
@@ -66,57 +70,77 @@ class MainActivity : AppCompatActivity() {
         var audioRelPath = ""
         var audioFile: File? = null
 
-        // Recording Started
-        spRecordButton.setOnClickListener {
-            // 'catching' or saving the current date time (to the second)
-            // as soon as recording has started
-            val currentDateTime = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss").format(Date())
-            audioDateTime = currentDateTime
-            audioRelPath = "audio_vra_000_${audioDateTime}"
+        recordButtonIb.setOnClickListener {
+            // recording started
+            if (isRecording == false) {
+                isRecording = true
+                // UI changes - changing button image
+                recordButtonIb.setImageResource(R.drawable.recording_in_progress)
+                recordButtonIb.setBackgroundResource(R.drawable.recording_in_progress_background)
 
-            // creating the audio file
-            File(cacheDir, "${audioRelPath}.mp3").also{
+                // logic for recording file //
 
-                recorder.start(it) // recording the audio from mic and saving it in the file
-                audioFile = it // saving the (full) file path to this variable
+                // 'catching' or saving the current date time (to the second)
+                // as soon as recording has started
+                val currentDateTime = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss").format(Date())
+                audioDateTime = currentDateTime
+                audioRelPath = "audio_vra_000_${audioDateTime}"
 
-                // Visual indication to the user that audio is being recorded
-                Toast.makeText(applicationContext, "Recording Has Begun", Toast.LENGTH_SHORT).show()
-                Toast.makeText(applicationContext, audioRelPath, Toast.LENGTH_LONG).show()
-            }
-        }
+                // creating the audio file
+                File(cacheDir, "${audioRelPath}.mp3").also {
 
-        // Recording Stopped
-        spStopRecordButton.setOnClickListener {
-            recorder.stop()
-            Toast.makeText(applicationContext, "Recording Has Stopped", Toast.LENGTH_SHORT).show()
-            Toast.makeText(applicationContext, "File Name is: $audioFile", Toast.LENGTH_LONG).show()
-            val arbitraryDuration = "00:10.00"
+                    recorder.start(it) // recording the audio from mic and saving it in the file
+                    audioFile = it // saving the (full) file path to this variable
 
-            // Saving the file to a database //
-
-            // if audioFile isn't null, then save it to nonNullable, otherwise, save this path
-            val nonNullable: File = audioFile?: File("default/path/to/file")
-
-            // converting file size to kilobytes then saving that
-            val audioFileSize = "${nonNullable.length()/1024}KB"
-
-            // finally, creating the audio record
-            val audioRec = Audio(0, audioRelPath, arbitraryDuration, audioDateTime, audioFileSize)
-
-            // database operations are resource intensive; do them on a separate thread
-            CoroutineScope(Dispatchers.IO).launch {
-                try{
-                    // storing the audio metadata in the room database
-                    audioDao.insertAudio(audioRec)
-                    Log.i(MainActivityTag, "Audio stored in Database")
-                } catch (e: Exception) {
-                    Toast.makeText(applicationContext, "$audioRelPath has not been saved", Toast.LENGTH_LONG).show()
-                    e.printStackTrace()
-                    Log.e(MainActivityTag,"ERROR 70737669: Audio file not saved to database")
+                    // Visual indication to the user that audio is being recorded
+                    Toast.makeText(applicationContext, "Recording Has Begun", Toast.LENGTH_SHORT)
+                        .show()
+                    Toast.makeText(applicationContext, audioRelPath, Toast.LENGTH_LONG).show()
                 }
-            }
-        }
+            } else {
+                // recording stopped
+                isRecording = false
+                // UI changes - changing button image
+                recordButtonIb.setImageResource(R.drawable.no_recording)
+                recordButtonIb.setBackgroundResource(R.drawable.no_recording_background)
+
+                recorder.stop()
+                Toast.makeText(applicationContext, "Recording Has Stopped", Toast.LENGTH_SHORT)
+                    .show()
+                Toast.makeText(applicationContext, "File Name is: $audioFile", Toast.LENGTH_LONG)
+                    .show()
+                val arbitraryDuration = "00:10.00"
+
+                // Saving the file to a database //
+
+                // if audioFile isn't null, then save it to nonNullable, otherwise, save this path
+                val nonNullable: File = audioFile ?: File("default/path/to/file")
+
+                // converting file size to kilobytes then saving that
+                val audioFileSize = "${nonNullable.length() / 1024}KB"
+
+                // finally, creating the audio record
+                val audioRec =
+                    Audio(0, audioRelPath, arbitraryDuration, audioDateTime, audioFileSize)
+
+                // database operations are resource intensive; do them on a separate thread
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        // storing the audio metadata in the room database
+                        audioDao.insertAudio(audioRec)
+                        Log.i(MainActivityTag, "Audio stored in Database")
+                    } catch (e: Exception) {
+                        Toast.makeText(
+                            applicationContext,
+                            "$audioRelPath has not been saved",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        e.printStackTrace()
+                        Log.e(MainActivityTag, "ERROR 70737669: Audio file not saved to database")
+                    }
+                } // end of CoroutineScope
+            } // end of else (isRecording check)
+        } // end of setOnClickListener
 
         spPlayButton.setOnClickListener {
             player.playFile(audioFile?: return@setOnClickListener)
