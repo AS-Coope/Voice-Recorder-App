@@ -33,6 +33,7 @@ class AudioList : AppCompatActivity(), onItemClickListener {
 
 
         // database related initializations
+        // moved audioDao from here
         val audioDao = AudioDatabase.getDatabase(application).audioEntityDao()
         audioFiles = ArrayList()
         audioAdapter = Adapter(audioFiles, this)
@@ -47,6 +48,9 @@ class AudioList : AppCompatActivity(), onItemClickListener {
             audioFiles.addAll(audioDao.getAllRecords()) // database operations happen on a background thread
         }
         audioAdapter.notifyDataSetChanged() // but view/ui updates have to happen on the ui thread
+        // NOTE: notifyDataSetChanged() does not indicate which item in the data set has changed
+        // so all observers assume all the data has been changed (use it when all the data will be affected)
+        // if deleting use notifyItemRemoved(), or for inserting use notifyItemInserted()
 
     }
 
@@ -82,5 +86,38 @@ class AudioList : AppCompatActivity(), onItemClickListener {
             player.stop()
             Toast.makeText(this, "$audioFileName stopped playing", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // when view models are added, will eventually change how audio is deleted
+    // and reflected on the UI
+
+    // eventually, the functionality of the Long Click will be to select an audio file
+    // and not to automatically delete it
+
+    // additionally there should be a dialog box that asks if the user wants to delete the audio recording
+    // add that in the v1.1
+    override fun onItemLongClickListener(position: Int) {
+        // finding the audio in the recycler view
+        var audio = audioFiles[position]
+        var audioFileName = "${audio.aName}.mp3" // technically not necessary as I could just call
+                                                 // audio.aName wherever I need to reference the name
+                                                 // but it does help
+
+        // didn't want to put here but can't be referenced from inside the onCreate()
+        // where the original one is
+        val audioDao2 = AudioDatabase.getDatabase(application).audioEntityDao()
+
+        Toast.makeText(this, "$audioFileName has been deleted!", Toast.LENGTH_LONG).show()
+
+        // deleting the audio from the recycler view
+        CoroutineScope(Dispatchers.IO).launch {
+            // io operations, like database operations are resource intensive so do it on
+            // a different thread than the UI thread
+            audioDao2.deleteAudio(audio.aId)
+        }
+        // removes the item from the list shown in the recycler view
+        audioFiles.removeAt(position)
+        // notifies the view of these changes made to the list of audios
+        audioAdapter.notifyItemRemoved(position)
     }
 }

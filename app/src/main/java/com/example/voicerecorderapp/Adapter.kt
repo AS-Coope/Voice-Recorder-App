@@ -11,13 +11,14 @@ class Adapter(
     var audioFiles: ArrayList<Audio>, var itemListener: onItemClickListener
     ): RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-    inner class ViewHolder(theView: View): RecyclerView.ViewHolder(theView), View.OnClickListener{
+    inner class ViewHolder(theView: View): RecyclerView.ViewHolder(theView), View.OnClickListener, View.OnLongClickListener{
         var audioName: TextView = theView.findViewById(R.id.audioName)
         var audioSize: TextView = theView.findViewById(R.id.audioSize)
         var audioLength: TextView = theView.findViewById(R.id.audioLength)
 
         init {
             itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
         }
 
         override fun onClick(v: View?) {
@@ -25,10 +26,23 @@ class Adapter(
             // get the position of the item in the recycler view
             val itemPosition = adapterPosition
             // ensuring that the item does appear in the recycler view
-            if(itemPosition != RecyclerView.NO_POSITION)  {
+            if (itemPosition != RecyclerView.NO_POSITION) {
                 itemListener.onItemClickListener(itemPosition)
             }
         }
+
+        override fun onLongClick(v: View?): Boolean {
+            // getting the position of the item in the recycler view
+            val itemPosition = adapterPosition
+            // ensuring that the item does appear in the recycler view (that it is not out of bounds)
+            if (itemPosition != RecyclerView.NO_POSITION){
+                itemListener.onItemLongClickListener(itemPosition)
+                return true
+            }
+            return false
+        }
+
+
     }// end of View Holder inner class
 
     // creates the audio layout but does not fill in the various text fields
