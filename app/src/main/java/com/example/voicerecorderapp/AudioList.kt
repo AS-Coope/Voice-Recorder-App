@@ -2,6 +2,7 @@ package com.example.voicerecorderapp
 
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -68,6 +69,10 @@ class AudioList : AppCompatActivity(), onItemClickListener {
             // logic update
             isPlaying = true
             player.playFile(theAudioFile)
+            Toast.makeText(this, "$audioFileName is playing", Toast.LENGTH_SHORT).show()
+            // TODO(Detect when the audio itself has ended and stop playing even if the user didn't
+            //      click the button to stop audio playing)
+
         } else {
             // ui related updates
             //recordingPlayBtn.setImageResource(R.drawable.play_audio)
@@ -75,6 +80,7 @@ class AudioList : AppCompatActivity(), onItemClickListener {
             // logic update
             isPlaying = false
             player.stop()
+            Toast.makeText(this, "$audioFileName stopped playing", Toast.LENGTH_SHORT).show()
         }
     }
 }

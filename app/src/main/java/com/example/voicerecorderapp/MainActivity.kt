@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -63,8 +62,6 @@ class MainActivity : AppCompatActivity() {
         // image button views
         val recordButtonIb = findViewById<ImageView>(R.id.recordIb)
         val audioListButtonIb = findViewById<ImageView>(R.id.audioListIb)
-
-        //TODO("Set up logic to change image (play or stop) based on what is currently present")
 
         // setting up file details
         var audioDateTime = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss").format(Date())
