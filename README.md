@@ -28,3 +28,7 @@ To consider the app 'complete', or to have some sort of end point to the develop
 
 Completion of v1.1 includes:
 - [ ] The app shall prevent the user from leaving the recording screen, once a recording has begun.
+
+## Known Bugs
+- If an **audio recording**, **A**, is clicked in the audio list, a Toast will inform the user that audio recording **A** has started playing. However, if *audio recording*, *B*, another audio recording in the list, is clicked, then it stops the playing of audio recording **A** and then generates a Toast which informs the user that audio recording _B_ has stopped, but really it is audio recording **A** that actually stopped.
+- Currently, if you start to record audio and go to the **audio list screen (activity)** from _record audio screen (activity)_ then the audio is still being recorded and will stop only when you return to the _record audio screen_ and click the button to stop the recording.
