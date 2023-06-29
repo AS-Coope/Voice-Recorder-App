@@ -25,3 +25,6 @@ To consider the app 'complete', or to have some sort of end point to the develop
 - [ ] The app shall allow the user to view details (metadata) of an audio recording.
 - [ ] The app shall allow the user to rename their audio recording whether immediately after recording the audio or when they view the audio recording from the list.
 - [X] The app shall allow the user to delete audio recordings from their device.
+
+Completion of v1.1 includes:
+- [ ] The app shall prevent the user from leaving the recording screen, once a recording has begun.
