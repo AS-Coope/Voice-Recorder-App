@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +37,11 @@ class MainActivity : AppCompatActivity() {
     var isRecording: Boolean = false
     //private var audioFile: File? = null
 
+    // setting up file details
+    var audioDateTime = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss").format(Date())
+    var audioRelPath = ""
+    var audioFile: File? = null
+
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,13 +65,8 @@ class MainActivity : AppCompatActivity() {
         //val spStopPlayButton = findViewById<Button>(R.id.spBtnStopPlayAudio)
 
         // image button views
-        val recordButtonIb = findViewById<ImageView>(R.id.recordIb)
-        val audioListButtonIb = findViewById<ImageView>(R.id.audioListIb)
-
-        // setting up file details
-        var audioDateTime = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss").format(Date())
-        var audioRelPath = ""
-        var audioFile: File? = null
+        val recordButtonIb = findViewById<ImageButton>(R.id.recordIb)
+        val audioListButtonIb = findViewById<ImageButton>(R.id.audioListIb)
 
         recordButtonIb.setOnClickListener {
             // recording started
@@ -159,4 +159,8 @@ class MainActivity : AppCompatActivity() {
         }*/
 
     } // end of onCreate method
+
+    private fun record(){
+        // recording started
+    }
 }
