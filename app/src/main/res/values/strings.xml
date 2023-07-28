@@ -9,4 +9,7 @@
     <string name="stop_playing_record_audio">Stop Playing Audio</string>
 
     <string name="audio_list_title">Audio Recordings</string>
+    <string name="file_name_placeholder">filename</string>
+    <string name="file_size_placeholder">filesize</string>
+    <string name="file_length_placeholder">filelength</string>
 </resources>
