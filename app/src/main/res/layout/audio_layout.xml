@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:backgroundTint="@color/grayDark"
     android:background="?selectableItemBackground"
     android:padding="10dp"
     android:layout_margin="10dp"
