@@ -14,17 +14,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageButton
             android:id="@+id/recordingPlay"
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_margin="10dp"
-            android:layout_marginStart="20dp"
             android:background="@drawable/recording_in_progress_background"
             android:clickable="false"
-            android:foregroundGravity="center_vertical"
+            android:foregroundGravity="center"
             android:src="@drawable/play_audio"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,6 +37,7 @@
             android:text="@string/file_name_placeholder"
             android:textSize="25sp"
             android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintStart_toEndOf="@id/recordingPlay"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/file_size_placeholder"
-            android:textSize="25sp"
             android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintStart_toEndOf="@id/recordingPlay"
             app:layout_constraintTop_toBottomOf="@id/audioName" />
 
@@ -58,8 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:text="@string/file_length_placeholder"
-            android:textSize="25sp"
             android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/audioName" />
 
