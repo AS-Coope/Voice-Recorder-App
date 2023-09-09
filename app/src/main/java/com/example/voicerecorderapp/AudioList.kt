@@ -96,6 +96,13 @@ class AudioList : AppCompatActivity(), onItemClickListener {
 
     // additionally there should be a dialog box that asks if the user wants to delete the audio recording
     // add that in the v1.1
+
+    // Need this here to have the overall class work but remove when using the actual longClickListener
+    override fun onItemLongClickListener(position: Int) {
+        TODO("Not yet implemented")
+    }
+    // Disabled OnItemLongClickListener (currently deletes audio recording); Uncomment to disable
+    /*
     override fun onItemLongClickListener(position: Int) {
         // finding the audio in the recycler view
         var audio = audioFiles[position]
@@ -120,4 +127,5 @@ class AudioList : AppCompatActivity(), onItemClickListener {
         // notifies the view of these changes made to the list of audios
         audioAdapter.notifyItemRemoved(position)
     }
+    */
 }
