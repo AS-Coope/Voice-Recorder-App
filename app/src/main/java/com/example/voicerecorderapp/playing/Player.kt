@@ -15,6 +15,7 @@ class Player(private val context: Context) {
         }
     }
 
+
     fun stop() {
         player?.stop() // stop it playing
         player?.release() // release the resources of the player

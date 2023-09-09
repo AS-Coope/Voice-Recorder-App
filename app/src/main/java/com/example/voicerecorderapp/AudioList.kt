@@ -68,7 +68,7 @@ class AudioList : AppCompatActivity(), onItemClickListener {
         //println(theAudioFile.absoluteFile)
 
             // ui related updates
-            //recordingPlayBtn.setImageResource(R.drawable.stop_audio)
+            // recordingPlayBtn.setImageResource(R.drawable.stop_audio)
 
             // logic update
             isPlaying = true

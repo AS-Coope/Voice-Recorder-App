@@ -11,14 +11,17 @@ class Adapter(
     var audioFiles: ArrayList<Audio>, var itemListener: onItemClickListener
     ): RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-    inner class ViewHolder(theView: View): RecyclerView.ViewHolder(theView), View.OnClickListener, View.OnLongClickListener{
+    // , View.OnLongClickListener - add to the ViewHolder class implements list when using longClickListener
+    inner class ViewHolder(theView: View): RecyclerView.ViewHolder(theView), View.OnClickListener{
         var audioName: TextView = theView.findViewById(R.id.audioName)
         var audioSize: TextView = theView.findViewById(R.id.audioSize)
         var audioLength: TextView = theView.findViewById(R.id.audioLength)
 
         init {
             itemView.setOnClickListener(this)
-            itemView.setOnLongClickListener(this)
+
+            // uncomment when making onLongClickListener
+            //itemView.setOnLongClickListener(this)
         }
 
         override fun onClick(v: View?) {
@@ -31,6 +34,7 @@ class Adapter(
             }
         }
 
+        /*
         override fun onLongClick(v: View?): Boolean {
             // getting the position of the item in the recycler view
             val itemPosition = adapterPosition
@@ -41,6 +45,8 @@ class Adapter(
             }
             return false
         }
+
+         */
 
 
     }// end of View Holder inner class
