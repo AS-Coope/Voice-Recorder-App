@@ -1,5 +1,8 @@
 # Android Voice Recorder App
 
+## Screenshots
+<img src="img/project_voice_recorder.jpg" height=480px width=auto alt="Screenshot: Voice Recorder App Audio List">
+
 ## Overview
 This is an Android application that allows you to record audio, view saved audio recordings and play saved audio recordings. It is built using the Kotlin programming language and developed in Android Studio. It also makes use of dependencies such as Room Database, for local storage, and coroutines, for asynchronous programming. It is tested in an emulator of the Google Pixel 3A.  
 The aim of this project is to get better at developing Android applications using the Kotlin programming language, and build an audio recorder for my Android device. I'm also aiming to:
