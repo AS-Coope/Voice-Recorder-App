@@ -68,6 +68,15 @@ class MainActivity : AppCompatActivity() {
         val recordButtonIb = findViewById<ImageButton>(R.id.recordIb)
         val audioListButtonIb = findViewById<ImageButton>(R.id.audioListIb)
 
+        fun enableAudiolistButton(status: Boolean){
+            audioListButtonIb.isEnabled = status
+            audioListButtonIb.alpha = if (status) {
+                1.0f
+            } else {
+                0.5f
+            }
+        }
+
         recordButtonIb.setOnClickListener {
             // recording started
             if (isRecording == false) {
@@ -75,6 +84,7 @@ class MainActivity : AppCompatActivity() {
                 // UI changes - changing button image
                 recordButtonIb.setImageResource(R.drawable.recording_in_progress)
                 recordButtonIb.setBackgroundResource(R.drawable.recording_in_progress_background)
+                enableAudiolistButton(false) // disable the audio list button while recording is happening
 
                 // logic for recording file //
 
@@ -103,6 +113,9 @@ class MainActivity : AppCompatActivity() {
                 recordButtonIb.setBackgroundResource(R.drawable.no_recording_background)
 
                 recorder.stop()
+
+                enableAudiolistButton(true) // enable the audio list button once recording has ended
+
                 Toast.makeText(applicationContext, "Recording Has Stopped", Toast.LENGTH_SHORT)
                     .show()
                 Toast.makeText(applicationContext, "File Name is: $audioFile", Toast.LENGTH_LONG)
@@ -163,4 +176,6 @@ class MainActivity : AppCompatActivity() {
     private fun record(){
         // recording started
     }
+
+
 }
