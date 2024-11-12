@@ -20,17 +20,23 @@ To use this project:
 * Open the project (dependencies such as Room and coroutines will already be in the build.gradle file so there is no need to make any changes to those unless to upgrade the version being used. Ensure that you click 'Sync Now' if you make any changes in the build.gradle file).
 
 ## Functional Requirements/ Deliverables
-To consider the app 'complete', or to have some sort of end point to the development of a v1.0, the following are the deliverables for this project:
+For v1.0:
+
 - [X] The app shall allow the user to record audio.
 - [X] The app shall store the user's audio along with metadata such as time duration, file size, file name, length of the audio and its storage location on the device.
 - [X] The app shall show the user all audio recordings in a list.
 - [X] The app shall allow the user to play any audio recording they choose from the list.
 - [ ] The app shall allow the user to view details (metadata) of an audio recording.
-- [ ] The app shall allow the user to rename their audio recording whether immediately after recording the audio or when they view the audio recording from the list.
+- [ ] The app shall allow the user to rename their audio recording, whether immediately after recording the audio or when they view the audio recording from the list.
 - [X] The app shall allow the user to delete audio recordings from their device.
+- [X] The app shall prevent the user from leaving the recording screen, to go to another screen in-app, once a recording has begun.
+- [ ] The app shall allow the user to share audio recordings to other applications.
+- [ ] The app shall allow the user to cut/snip parts of an audio recording.
 
-Completion of v1.1 includes:
-- [ ] The app shall prevent the user from leaving the recording screen, once a recording has begun.
+For v2.0:
+
+- [ ] The app shall allow the user to save audio recordings as a .wav files.
+- [ ] The app shall allow the user to switch between saving recordings as .wav or .mp3.
 
 ## Known Bugs
 - If an **audio recording**, **A**, is clicked in the audio list, a Toast will inform the user that audio recording **A** has started playing. However, if *audio recording*, *B*, another audio recording in the list, is clicked, then it stops the playing of audio recording **A** and then generates a Toast which informs the user that audio recording _B_ has stopped, but really it is audio recording **A** that actually stopped.
